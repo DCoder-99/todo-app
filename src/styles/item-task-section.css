@@ -1,0 +1,11 @@
+.task-section-active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: var(--space);
+    height: calc(5 * var(--space));
+    border-radius: var(--space);
+    background-color: #3b82f6;
+}

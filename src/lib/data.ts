@@ -1,5 +1,5 @@
 import { IconCalendarCheck, IconHome, IconStar, IconSun, IconUser } from './../components/icons';
-import { ITaskSection } from "./interface";
+import { IContextMenuNewSectionTask, ITaskSection } from "./interface";
 
 export const DTaskSection:ITaskSection[] = [
     {
@@ -36,5 +36,52 @@ export const DTaskSection:ITaskSection[] = [
         icon: IconHome,
         link: '',
         active: false
+    }
+]
+
+export const DContextMenuNewSection:IContextMenuNewSectionTask[] = [
+    {
+        id: 'rename',
+        label: 'Rename list',
+        icon: IconStar,
+        type: 'normal',
+        shortcut: 'F2'
+    },
+    {
+        id: 'share',
+        label: 'Share list',
+        icon: IconStar,
+        type: 'normal'
+    },
+    {
+        id: 'print',
+        label: 'Print list',
+        icon: IconStar,
+        type: 'normal'
+    },
+    {
+        id: 'email',
+        label: 'Email list',
+        icon: IconStar,
+        type: 'normal'
+    },
+    {
+        id: 'pin',
+        label: 'Pin to Start',
+        icon: IconStar,
+        type: 'normal'
+    },
+    {
+        id: 'duplicate',
+        label: 'Duplicate list',
+        icon: IconStar,
+        type: 'normal'
+    }
+    ,{
+        id: 'delete',
+        label: 'Delete list',
+        icon: IconStar,
+        type: 'danger',
+        shortcut: 'Delete'
     }
 ]

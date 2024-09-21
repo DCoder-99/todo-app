@@ -15,3 +15,16 @@ export interface ITask {
     status: 0 | 1,  // 0: todo, 1: done
     taskSectionId: string
 }
+
+export interface IContextMenuNewSectionTask {
+    id: string, 
+    label: string,
+    icon: React.FC,
+    type: 'normal' | 'danger',
+    shortcut?: string
+}
+
+export interface IContextType {
+    state: any,
+    dispatch: (action: any) => void
+}

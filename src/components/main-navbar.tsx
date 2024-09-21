@@ -9,6 +9,7 @@ import { TaskContext } from '@/context/task-context'
 import { DTaskSection } from '@/lib/data'
 import { initialTasksSection, tasksSectionReducer, TypeDispatchTaskSection } from '@/context/tasks-reducer'
 import { ITaskSection } from '@/lib/interface'
+import { TasksContext } from '@/context/tasks-context'
 
 const MainNavBar = () => {
 
@@ -47,13 +48,15 @@ const MainNavBar = () => {
 
     return (
         <div className='w-72 hidden sm:flex flex-col p-4 pb-0'>
-            <ProfileUser />
-            <SearchTask />
-            <ListTaskSection 
-                tasksSection={tasksSection}
-                onChooseTaskSection={handleChooseTaskSection}
-                onAddTaskSection={handleAddTaskSection} />
-                {/* <DailyTask /> */}
+            <TasksContext.Provider value={{ state: tasksSection, dispatch }}>
+                <ProfileUser />
+                <SearchTask />
+                <ListTaskSection 
+                    tasksSection={tasksSection}
+                    onChooseTaskSection={handleChooseTaskSection}
+                    onAddTaskSection={handleAddTaskSection} />
+                    {/* <DailyTask /> */}
+            </TasksContext.Provider>
         </div>
     )
 }

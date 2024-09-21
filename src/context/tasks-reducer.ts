@@ -49,10 +49,15 @@ export function tasksSectionReducer(tasksSection: ITaskSection[], action: ITaskS
           return tasksSection.filter(t => t.id !== action?.id);
     
         case TypeDispatchTaskSection.ADD_TASK_SECTION: // Add task section
-          return action?.value ? [...tasksSection, action.value] : tasksSection;
-    
+          {
+            let _tasksSection = tasksSection.map(t => ({ ...t, active: false }));
+            return action?.value ? [..._tasksSection, action.value] : tasksSection;
+          }
         case TypeDispatchTaskSection.EDIT_TASK_SECTION: // Edit task section
-          return tasksSection.map(t => (t.id === action?.id ? action?.value || t : t));
+          {
+            console.log('[debugger] edit task: ', action)
+            return tasksSection.map(t => (t.id === action?.id ? action?.value || t : t));
+          }
     
         case TypeDispatchTaskSection.CHOOSE_TASK_SECTION: // Choose task section (activate/deactivate)
           return tasksSection.map(t =>

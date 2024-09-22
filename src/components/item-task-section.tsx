@@ -37,7 +37,6 @@ const ItemTaskSection: React.FC<Props> = ({ taskSection, handleChangeTaskSection
     }
 
     const handleSelectMenu = (menu: IContextMenuNewSectionTask) => {
-        console.log('[debugger] menu: ', menu)
         switch (menu.id) {
             case 'rename':
                 return handleRenameSection()
@@ -56,7 +55,7 @@ const ItemTaskSection: React.FC<Props> = ({ taskSection, handleChangeTaskSection
                     <taskSection.icon />
                     {
                         isEdit ? 
-                        <input value={sectionValue} onChange={(e) => setSectionValue(e.target.value)} onBlur={handleBlurRename}/> : 
+                        <input className='w-[calc(100%-24px)]' value={sectionValue} onChange={(e) => setSectionValue(e.target.value)} onBlur={handleBlurRename} onKeyDown={(e) => e.key === "Enter" && handleBlurRename()}/> : 
                         <span className='overflow-hidden text-ellipsis whitespace-nowrap w-64' title={taskSection.lable}>{taskSection.lable}</span>
                     }
                 </div>

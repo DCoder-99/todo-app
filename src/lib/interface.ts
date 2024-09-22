@@ -13,7 +13,7 @@ export interface ITask {
     id: string, 
     label: string,
     status: 0 | 1,  // 0: todo, 1: done
-    taskSectionId: string
+    taskSectionId?: string
 }
 
 export interface IContextMenuNewSectionTask {

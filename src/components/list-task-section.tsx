@@ -1,5 +1,5 @@
 'use client'
-import useTaskSection from '@/hooks/useTaskSection'
+import useTask from '@/hooks/useTask'
 import { ITaskSection } from '@/lib/interface'
 import ItemTaskSection from './item-task-section'
 import { Button } from './ui/button'
@@ -13,7 +13,7 @@ interface IPropsListTaskSection {
 
 const ListTaskSection = ({tasksSection, onChooseTaskSection, onAddTaskSection}:IPropsListTaskSection) => {
 
-    const { newTaskSection } = useTaskSection()
+    const { newTaskSection } = useTask()
 
     const handleAddTaskSection = () => {
         onAddTaskSection(newTaskSection())

@@ -1,17 +1,18 @@
-import { IconStar } from '@/components/icons'
-import { ITaskSection } from '@/lib/interface'
-import React from 'react'
-import useTasksContext from './useTasksContext'
+import { ITask, ITaskSection } from '@/lib/interface';
+import { IconNewTask } from '../components/icons';
+import useTasksContext from './useTasksContext';
 
 /**
  * Hook task section
  * @returns 
  */
-const useTaskSection = () => {
+const useTask = () => {
 
     const { state } = useTasksContext()
 
     const genIdTaskSection = Math.ceil(Math.random() * 100000)  // Random id của task section
+    const genId = new Date().getTime()
+
     const genLabelTaskSection = ():string => {
         let label = 'Untitled section'      // Khởi tạo label
         if(!state?.length) return label     // Kiểm tra giá trị state
@@ -34,15 +35,24 @@ const useTaskSection = () => {
             id: 'new-task-' + genIdTaskSection,
             lable: genLabelTaskSection(),
             active: true,
-            icon: IconStar,
+            icon: IconNewTask,
             link: '',
             tasks: []
         }
     )
 
+    const newTask = (label: string):ITask => (
+        {
+            id: 'task-' + genId,
+            label,
+            status: 0
+        }
+    )
+
     return {
-        newTaskSection
+        newTaskSection,
+        newTask
     }
 }
 
-export default useTaskSection
+export default useTask

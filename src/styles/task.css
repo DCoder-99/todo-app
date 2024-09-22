@@ -1,0 +1,10 @@
+.my-day-container {
+    background-image: url('../assests/capybara.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    flex: 1;
+
+    border-top-left-radius: 12px;
+}

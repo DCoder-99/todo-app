@@ -1,32 +1,5 @@
-// export function tasksReducer(tasks, action) {
-//     switch (action.type) {
-//         case 'added': {
-//             return [...tasks, {
-//             id: action.id,
-//             text: action.text,
-//             done: false
-//             }];
-//         }
-//         case 'changed': {
-//             return tasks.map(t => {
-//             if (t.id === action.task.id) {
-//                 return action.task;
-//             } else {
-//                 return t;
-//             }
-//             });
-//         }
-//         case 'deleted': {
-//             return tasks.filter(t => t.id !== action.id);
-//         }
-//         default: {
-//             throw Error('Unknown action: ' + action.type);
-//         }
-//     }
-// }
-
 import { DTaskSection } from "@/lib/data";
-import { ITaskSection } from "@/lib/interface";
+import { ITask, ITaskSection } from "@/lib/interface";
 
 export const initialTasksSection = DTaskSection
 
@@ -35,12 +8,16 @@ export enum TypeDispatchTaskSection {
     EDIT_TASK_SECTION = 'EDIT_TASK_SECTION',
     CHOOSE_TASK_SECTION = 'CHOOSE_TASK_SECTION',
     DELETE_TASK_SECTION = 'DELETE_TASK_SECTION',
+    ADD_NEW_TASK = 'ADD_NEW_TASK',
+    COMPLETED_TASK = 'COMPLETED_TASK'
 }
 
 interface ITaskSectionAction {
     type: TypeDispatchTaskSection,
     value?: ITaskSection,
-    id?: string
+    task?: ITask,
+    id?: string,
+    taskCompleteId?: string
 }
 
 export function tasksSectionReducer(tasksSection: ITaskSection[], action: ITaskSectionAction) {
@@ -55,7 +32,6 @@ export function tasksSectionReducer(tasksSection: ITaskSection[], action: ITaskS
           }
         case TypeDispatchTaskSection.EDIT_TASK_SECTION: // Edit task section
           {
-            console.log('[debugger] edit task: ', action)
             return tasksSection.map(t => (t.id === action?.id ? action?.value || t : t));
           }
     
@@ -63,7 +39,10 @@ export function tasksSectionReducer(tasksSection: ITaskSection[], action: ITaskS
           return tasksSection.map(t =>
             t.id === action?.id ? { ...t, active: true } : { ...t, active: false }
           );
-    
+        case TypeDispatchTaskSection.ADD_NEW_TASK:  // Add new task to task section
+          {
+            return tasksSection.map(t => (t.id === action?.id && action?.task && !t.tasks?.some(tt => tt.id === action.task?.id)) ? t.tasks?.push(action?.task) : t)
+          }
         default:
           throw new Error('Unknown action: ' + action.type);
     }

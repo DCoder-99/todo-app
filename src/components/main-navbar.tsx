@@ -1,22 +1,15 @@
 'use client'
 
-import React, { useReducer } from 'react'
-import SearchTask from './search-task'
-import ListTaskSection from './list-task-section'
-import DailyTask from './daily-task'
-import ProfileUser from './profile-user'
-import { TaskContext } from '@/context/task-context'
-import { DTaskSection } from '@/lib/data'
-import { initialTasksSection, tasksSectionReducer, TypeDispatchTaskSection } from '@/context/tasks-reducer'
+import { TypeDispatchTaskSection } from '@/context/tasks-reducer'
+import useTasksContext from '@/hooks/useTasksContext'
 import { ITaskSection } from '@/lib/interface'
-import { TasksContext } from '@/context/tasks-context'
+import ListTaskSection from './list-task-section'
+import ProfileUser from './profile-user'
+import SearchTask from './search-task'
 
 const MainNavBar = () => {
 
-    const [tasksSection, dispatch] = useReducer(
-        tasksSectionReducer,
-        initialTasksSection
-    );
+    const { state: tasksSection, dispatch } = useTasksContext()
 
     const handleAddTaskSection = (value: ITaskSection) => {
         dispatch({
@@ -48,15 +41,13 @@ const MainNavBar = () => {
 
     return (
         <div className='w-72 hidden sm:flex flex-col p-4 pb-0'>
-            <TasksContext.Provider value={{ state: tasksSection, dispatch }}>
-                <ProfileUser />
-                <SearchTask />
-                <ListTaskSection 
-                    tasksSection={tasksSection}
-                    onChooseTaskSection={handleChooseTaskSection}
-                    onAddTaskSection={handleAddTaskSection} />
-                    {/* <DailyTask /> */}
-            </TasksContext.Provider>
+            <ProfileUser />
+            <SearchTask />
+            <ListTaskSection 
+                tasksSection={tasksSection}
+                onChooseTaskSection={handleChooseTaskSection}
+                onAddTaskSection={handleAddTaskSection} />
+                {/* <DailyTask /> */}
         </div>
     )
 }

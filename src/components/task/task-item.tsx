@@ -1,11 +1,18 @@
-import { ITask, ITaskSection } from '@/lib/interface'
-import React from 'react'
-import { IconCheckCircle, IconCircle, IconStar } from '../icons'
-import useTasksContext from '@/hooks/useTasksContext'
 import { TypeDispatchTaskSection } from '@/context/tasks-reducer'
+import useTasksContext from '@/hooks/useTasksContext'
+import { ITask } from '@/lib/interface'
+import { IconCheckCircle, IconCircle, IconStar } from '../icons'
 
 interface TaskItemProps {
     task: ITask
+}
+
+function playCompleted():void {
+    const sound = new Audio('assests/completed_task.mp3');
+
+    sound.play().catch(error => {
+      console.error("Error playing sound:", error);
+    });
 }
 
 const TaskItem = ({task}:TaskItemProps) => {
@@ -13,6 +20,7 @@ const TaskItem = ({task}:TaskItemProps) => {
     const { dispatch } = useTasksContext()
 
     const handleCompletedTask = (status: 0 | 1) => {
+        status && playCompleted()
         // TODO: update completed task
         dispatch({
             type: TypeDispatchTaskSection.UPDATE_STATUS_TASK,

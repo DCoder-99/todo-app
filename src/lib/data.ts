@@ -24,28 +24,29 @@ export const DTaskSection:ITaskSectionMap = {
         icon: IconStar,
         link: '',
         tasks: []
-    },
-    'ts-planned': {
-        id: DEFEAULT_ID_TASK_SECTION.PLANNED,
-        lable: 'Planned',
-        icon: IconCalendarCheck,
-        link: '',
-        tasks: []
-    },
-    'ts-assigned-to-me': {
-        id: DEFEAULT_ID_TASK_SECTION.ASSIGNED_TO_ME,
-        lable: 'Assigned to me',
-        icon: IconUser,
-        link: '',
-        tasks: []
-    },
-    'ts-tasks': {
-        id: DEFEAULT_ID_TASK_SECTION.TASKS,
-        lable: 'Tasks',
-        icon: IconHome,
-        link: '',
-        tasks: []
     }
+    // ,
+    // 'ts-planned': {
+    //     id: DEFEAULT_ID_TASK_SECTION.PLANNED,
+    //     lable: 'Planned',
+    //     icon: IconCalendarCheck,
+    //     link: '',
+    //     tasks: []
+    // },
+    // 'ts-assigned-to-me': {
+    //     id: DEFEAULT_ID_TASK_SECTION.ASSIGNED_TO_ME,
+    //     lable: 'Assigned to me',
+    //     icon: IconUser,
+    //     link: '',
+    //     tasks: []
+    // },
+    // 'ts-tasks': {
+    //     id: DEFEAULT_ID_TASK_SECTION.TASKS,
+    //     lable: 'Tasks',
+    //     icon: IconHome,
+    //     link: '',
+    //     tasks: []
+    // }
 }
 
 export const DContextMenuNewSection:IContextMenuNewSectionTask[] = [
@@ -55,37 +56,37 @@ export const DContextMenuNewSection:IContextMenuNewSectionTask[] = [
         icon: IconStar,
         type: 'normal',
         shortcut: 'F2'
-    },
-    {
-        id: 'share',
-        label: 'Share list',
-        icon: IconStar,
-        type: 'normal'
-    },
-    {
-        id: 'print',
-        label: 'Print list',
-        icon: IconStar,
-        type: 'normal'
-    },
-    {
-        id: 'email',
-        label: 'Email list',
-        icon: IconStar,
-        type: 'normal'
-    },
-    {
-        id: 'pin',
-        label: 'Pin to Start',
-        icon: IconStar,
-        type: 'normal'
-    },
-    {
-        id: 'duplicate',
-        label: 'Duplicate list',
-        icon: IconStar,
-        type: 'normal'
     }
+    // {
+    //     id: 'share',
+    //     label: 'Share list',
+    //     icon: IconStar,
+    //     type: 'normal'
+    // },
+    // {
+    //     id: 'print',
+    //     label: 'Print list',
+    //     icon: IconStar,
+    //     type: 'normal'
+    // },
+    // {
+    //     id: 'email',
+    //     label: 'Email list',
+    //     icon: IconStar,
+    //     type: 'normal'
+    // },
+    // {
+    //     id: 'pin',
+    //     label: 'Pin to Start',
+    //     icon: IconStar,
+    //     type: 'normal'
+    // },
+    // {
+    //     id: 'duplicate',
+    //     label: 'Duplicate list',
+    //     icon: IconStar,
+    //     type: 'normal'
+    // }
     ,{
         id: 'delete',
         label: 'Delete list',

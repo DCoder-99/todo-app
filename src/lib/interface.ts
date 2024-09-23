@@ -1,19 +1,32 @@
 import React from "react";
 
+export interface ITaskSectionMap {
+    [sectionId: string]: ITaskSection;
+}
+
+export interface ITaskMap {
+    [taskId: string]: ITask;
+}
+  
+export interface ITaskState {
+    taskSections: ITaskSectionMap;
+    tasks: ITaskMap;
+    sectionIdActive: string; 
+}
+
 export interface ITaskSection {
     id: string,
     lable: string,
     icon: React.FC,
     link: string,
-    active: boolean,
-    tasks?: ITask[]
+    tasks: string[]
 }
 
 export interface ITask {
     id: string, 
     label: string,
     status: 0 | 1,  // 0: todo, 1: done
-    taskSectionId?: string
+    taskSectionId: string
 }
 
 export interface IContextMenuNewSectionTask {
@@ -25,6 +38,6 @@ export interface IContextMenuNewSectionTask {
 }
 
 export interface IContextType {
-    state: any,
+    state: ITaskState,
     dispatch: (action: any) => void
 }

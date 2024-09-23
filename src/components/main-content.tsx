@@ -4,14 +4,14 @@ import { ITask, ITaskSection } from '@/lib/interface'
 import MyDay from './task/my-day'
 import AddNewTask from './task/add-new-task'
 import TaskItem from './task/task-item'
+import { DEFEAULT_ID_TASK_SECTION } from '@/lib/data'
 
 const MainContent = () => {
 
     const { state } = useTasksContext()
+    const { taskSections, sectionIdActive } = state
 
-    const activeTaskSection = state.find((ts:ITaskSection) => ts.active)
-
-    if(activeTaskSection.id === 'ts-my-day') {
+    if(sectionIdActive === DEFEAULT_ID_TASK_SECTION.MY_DAY) {
         return (
             <MyDay />
         )
@@ -19,10 +19,10 @@ const MainContent = () => {
 
     return (
         <div>
-            {activeTaskSection.tasks.map((t: ITask) => (
+            {/* {activeTaskSection.tasks.map((t: ITask) => (
                 <TaskItem key={t.id} task={t}/>
-            ))}
-            <AddNewTask />
+            ))} */}
+            {/* <AddNewTask /> */}
         </div>
     )
 }

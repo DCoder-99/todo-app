@@ -20,20 +20,25 @@ const ID_MY_DAY = 'ts-my-day'
 
 const MyDay = () => {
 
-    const { state: tasksSection } = useTasksContext()
+    const { state } = useTasksContext()
+    const { taskSections, sectionIdActive, tasks } = state
 
     const today = new Date().toDateString()
-    const myDayTasks = tasksSection.find((t: ITaskSection) => t.id === ID_MY_DAY).tasks
+    const myDayTasks = taskSections[sectionIdActive].tasks
+    const taskValue:ITask[] = []
+    Object.keys(tasks).map((id) => {
+        if(myDayTasks?.includes(id)) taskValue.push(tasks[id])
+    })
 
     return (
         <div id='my-day-tasks' className='my-day-container p-10 relative flex flex-col justify-between gap-y-5'>
-            {!myDayTasks.length && <FocusOnYourDay />}
+            {!taskValue.length && <FocusOnYourDay />}
             <div className='header-my-day text-white'>
                 <h1 className='text-xl font-medium'>My Day</h1>
                 <span className=''>{today}</span>
             </div>    
             <div className='content-my-day flex-1 flex flex-col gap-y-2'>
-                {myDayTasks.map((t: ITask) => (
+                {taskValue.map((t:ITask) => (
                     <TaskItem key={t.id} task={t}/>
                 ))}
             </div>

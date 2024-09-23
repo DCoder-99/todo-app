@@ -1,37 +1,56 @@
-import { initialTasksSection, tasksSectionReducer, TypeDispatchTaskSection } from '@/context/tasks-reducer'
+import { TypeDispatchTaskSection } from '@/context/tasks-reducer'
+import useTasksContext from '@/hooks/useTasksContext'
 import { DContextMenuNewSection } from '@/lib/data'
-import { IContextMenuNewSectionTask, IContextType, ITaskSection } from '@/lib/interface'
-import React, { useContext, useReducer, useState } from 'react'
+import { IContextMenuNewSectionTask, ITaskSection } from '@/lib/interface'
+import React, { useState } from 'react'
 import '../styles/item-task-section.css'
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from './ui/context-menu'
-import { TasksContext } from '@/context/tasks-context'
-import useTasksContext from '@/hooks/useTasksContext'
 
 type Props = {
-    taskSection: ITaskSection,
-    handleChangeTaskSection: (id?: string) => void,
-    // handleUpdateTaskSection: (taskSection: ITaskSection) => void
+    taskSection: ITaskSection
 }
 
-const ItemTaskSection: React.FC<Props> = ({ taskSection, handleChangeTaskSection }) => {
+const ItemTaskSection: React.FC<Props> = ({ taskSection }) => {
 
-    const { dispatch } = useTasksContext()
+    const { state, dispatch } = useTasksContext()
+    const { sectionIdActive } = state
     const [isEdit, setIsEdit] = useState(false)
     const [sectionValue, setSectionValue] = useState('')
+
+    const isSectionActive = sectionIdActive === taskSection.id
+
+    const handleChooseTaskSection = (id:string) => {
+        dispatch({
+            type: TypeDispatchTaskSection.CHOOSE_TASK_SECTION,
+            payload: {
+                sectionId: id
+            }
+        })
+    }
 
     const handleRenameSection = () => {
         setIsEdit(true)
         setSectionValue(taskSection.lable)
     }
 
+    const handleDeleteSection = () => {
+        dispatch({
+            type: TypeDispatchTaskSection.DELETE_TASK_SECTION,
+            payload: {
+                sectionId: taskSection.id
+            }
+        })
+    }
+
     const handleBlurRename = () => {
         setIsEdit(false)
         dispatch({
             type: TypeDispatchTaskSection.EDIT_TASK_SECTION,
-            id: taskSection.id,
-            value: {
-                ...taskSection,
-                lable: sectionValue
+            payload: {
+                taskSection: {
+                    ...taskSection,
+                    lable: sectionValue
+                }
             }
         });
     }
@@ -40,6 +59,8 @@ const ItemTaskSection: React.FC<Props> = ({ taskSection, handleChangeTaskSection
         switch (menu.id) {
             case 'rename':
                 return handleRenameSection()
+            case 'delete':
+                return handleDeleteSection()
             default:
                 break;
         }
@@ -50,8 +71,9 @@ const ItemTaskSection: React.FC<Props> = ({ taskSection, handleChangeTaskSection
             <ContextMenuTrigger>
                 <div id={taskSection.id}
                     className={`flex rounded-sm my-1 px-3 py-2 hover:bg-slate-200 cursor-pointer gap-x-3 w-64
-                    ${taskSection.active ? 'bg-slate-100 relative task-section-active' : 'bg-white'}`}
-                    onClick={() => handleChangeTaskSection(taskSection.id)}>
+                    ${isSectionActive ? 'bg-slate-100 relative task-section-active' : 'bg-white'}`}
+                    onClick={() => handleChooseTaskSection(taskSection.id)}
+                    >
                     <taskSection.icon />
                     {
                         isEdit ? 

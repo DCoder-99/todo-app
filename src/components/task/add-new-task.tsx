@@ -10,16 +10,16 @@ const AddNewTask = () => {
 
     const [ isFocus, setIsFocus] = useState(false)
     const [taskLabel, setTaskLabel] = useState('')
-    const { state: tasksSection, dispatch } = useTasksContext()
+    const { state, dispatch } = useTasksContext()
+    const { sectionIdActive } = state
     const { newTask } = useTask()
-
-    const activeTaskSection = tasksSection.find((t: ITaskSection) => t.active).id
 
     const handleAddNewTask = () => {
         dispatch({
             type: TypeDispatchTaskSection.ADD_NEW_TASK,
-            id: activeTaskSection,
-            task: newTask(taskLabel)
+            payload: {
+                task: newTask(taskLabel, sectionIdActive)
+            }
         }) 
 
         setTaskLabel('')

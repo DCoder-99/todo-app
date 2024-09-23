@@ -1,48 +1,52 @@
 import { IconCalendarCheck, IconHome, IconStar, IconSun, IconUser } from './../components/icons';
-import { IContextMenuNewSectionTask, ITaskSection } from "./interface";
+import { IContextMenuNewSectionTask, ITaskSectionMap } from "./interface";
 
-export const DTaskSection:ITaskSection[] = [
-    {
-        id: 'ts-my-day',
+export const DEFEAULT_ID_TASK_SECTION = {
+    MY_DAY: 'ts-my-day',
+    IMPORTANT: 'ts-important',
+    PLANNED: 'ts-planned',
+    ASSIGNED_TO_ME: 'ts-assigned-to-me',
+    TASKS: 'ts-tasks'
+}
+
+// Inital task sections
+export const DTaskSection:ITaskSectionMap = {
+    'ts-my-day': {
+        id: DEFEAULT_ID_TASK_SECTION.MY_DAY,
         lable: 'My day',
         icon: IconSun,
         link: '',
-        active: true,
         tasks: []
     },
-    {
-        id: 'ts-important',
+    'ts-important': {
+        id: DEFEAULT_ID_TASK_SECTION.IMPORTANT,
         lable: 'Important',
         icon: IconStar,
         link: '',
-        active: false,
         tasks: []
     },
-    {
-        id: 'ts-planned',
+    'ts-planned': {
+        id: DEFEAULT_ID_TASK_SECTION.PLANNED,
         lable: 'Planned',
         icon: IconCalendarCheck,
         link: '',
-        active: false,
         tasks: []
     },
-    {
-        id: 'ts-assigned-to-me',
+    'ts-assigned-to-me': {
+        id: DEFEAULT_ID_TASK_SECTION.ASSIGNED_TO_ME,
         lable: 'Assigned to me',
         icon: IconUser,
         link: '',
-        active: false,
         tasks: []
     },
-    {
-        id: 'ts-tasks',
+    'ts-tasks': {
+        id: DEFEAULT_ID_TASK_SECTION.TASKS,
         lable: 'Tasks',
         icon: IconHome,
         link: '',
-        active: false,
         tasks: []
     }
-]
+}
 
 export const DContextMenuNewSection:IContextMenuNewSectionTask[] = [
     {
